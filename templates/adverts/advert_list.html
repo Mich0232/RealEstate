@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load adverts_tags %}
+{% load humanize %}
+
+{% block content %}
+
+<div class="container" style="margin-top: 100px;">
+    {% for advert in adverts %}
+        {% new_line_advert forloop.counter as new_line %}
+        {% if new_line or forloop.first %}
+
+            <div class="row">
+        {% endif %}
+
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail" style="height: 500px;">
+                    {% get_advert_thumbnail advert as advert_thumbnail %}
+                  <img src="{% if advert_thumbnail %}{{ advert_thumbnail }}{% else %}{% static 'img/no-photo.jpg' %}{% endif %}" alt="brak zdjecia" style="width: auto;height: 200px;">
+                  <div class="caption">
+                    <h3>{{ advert.title }}</h3>
+                    <p>{{ advert.description|linebreaks|safe|truncatechars:200 }}</p>
+                    <p>{{ advert.location }}, {{ advert.price|intcomma }}zł</p>
+                    <p><a href="{{ advert.get_absolute_url }}" class="btn btn-primary" role="button" >Szczegóły</a></p>
+                  </div>
+                </div>
+              </div>
+
+        {% if new_line %}
+            {% if not forloop.first or forloop.last %}
+                </div>
+                {% endif %}
+        {% endif %}
+        {% empty %}
+            <div class="jumbotron">
+              <h1>Brak ogłoszeń ...</h1>
+            </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
