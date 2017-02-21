@@ -1,6 +1,40 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 
+from taggit.managers import TaggableManager
+
+
+class SearchQueryset(models.QuerySet):
+    """
+        Custom queryset for Advert searching
+    """
+    def price_range(self, min_, max_):
+        query = self
+        if min_:
+            query = query.filter(price__gte=min_)
+        if max_:
+            query = query.filter(price__lte=max_)
+        return query
+
+    def tagged_with(self, tag_id):
+        query = self
+        if tag_id:
+            for id_ in tag_id:
+                query = query.filter(tags__exact=id_)
+        return query
+
+
+class SearchManager(models.Manager):
+    """ Search box Advert manager"""
+    def get_queryset(self):
+        return SearchQueryset(self.model, using=self._db)
+
+    def price_range(self, min_, max_):
+        return self.get_queryset().price_range(min_, max_)
+
+    def tagged_with(self, tag_id):
+        return self.get_queryset().tagged_with(tag_id)
+
 
 class Advert(models.Model):
     """
@@ -21,16 +55,16 @@ class Advert(models.Model):
     location = models.CharField(max_length=30, verbose_name='Lokacja', blank=True)
     type = models.CharField(max_length=10, choices=ADVERT_TYPES, verbose_name='Typ ogłoszenia')
     estate = models.CharField(max_length=12, choices=ESTATE_TYPES, verbose_name='Typ nieruchomości')
-    size = models.DecimalField(max_digits=8, decimal_places=1, verbose_name='Rozmiar')
-    plot_size = models.DecimalField(max_digits=8, decimal_places=1, verbose_name='Rozmiar działki', default=1)
-    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Cena')
+    size = models.DecimalField(max_digits=8, decimal_places=1, verbose_name='Rozmiar (m2)')
+    plot_size = models.DecimalField(max_digits=8, decimal_places=1, verbose_name='Rozmiar działki (m2)', default=0)
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Cena (zł)')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        ordering = ('type', )
-        verbose_name = 'Oferta'
-        verbose_name_plural = 'Oferty'
+    # Managers
+    objects = models.Manager()
+    tags = TaggableManager()
+    search = SearchManager()
 
     def __str__(self):
         return "({}) - {} | {}m2 | {}zł".format(dict(self.ESTATE_TYPES)[self.estate],
@@ -58,3 +92,35 @@ class Images(models.Model):
     class Meta:
         verbose_name = "Zdjęcie"
         verbose_name_plural = "Zdjęcia"
+
+
+class AdvertDetail(Advert):
+    """
+        Detailed info about Advert
+    """
+    HEATING_TYPES = (
+        ('gas', "Gazowe"),
+        ('coal', "Węglowe"),
+        ('electric', "Elektryczne"),
+        ('city', "Miejskie"),
+        ('furnace', "Kominkowe"),
+        ('diff', "inne"),
+    )
+    WINDOWS = (
+        ('wooden', 'Drewniane'),
+        ('plastic', 'Plastikowe')
+    )
+    FURNITURE = (
+        ('none', "Brak"),
+        ('half', "Kuchnia i łazienka"),
+        ('full', "Pełne"),
+    )
+    heating = models.CharField(max_length=10, choices=HEATING_TYPES, blank=True, null=True, verbose_name='Ogrzewanie')
+    windows = models.CharField(max_length=8, choices=WINDOWS, blank=True, null=True, verbose_name='Okna')
+    furniture = models.CharField(max_length=4, choices=FURNITURE, blank=True, null=True, verbose_name='Umeblowanie')
+    balcony = models.BooleanField(blank=True, verbose_name="Balkon")
+
+    class Meta:
+        ordering = ('type', )
+        verbose_name = 'Oferta'
+        verbose_name_plural = 'Oferty'

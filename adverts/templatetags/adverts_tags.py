@@ -46,3 +46,33 @@ def new_line_advert(loop, per_row=3):
         Return True if current Advert needs to be in new row (3 Adverts per row)
     """
     return True if loop % per_row == 0 else False
+
+
+HEATING_TYPES = (
+        ('gas', "Gazowe"),
+        ('coal', "Węglowe"),
+        ('electric', "Elektryczne"),
+        ('city', "Miejskie"),
+        ('furnace', "Kominkowe"),
+        ('diff', "inne"),
+    )
+WINDOWS = (
+        ('wooden', 'Drewniane'),
+        ('plastic', 'Plastikowe')
+    )
+FURNITURE = (
+        ('none', "Brak"),
+        ('half', "Kuchnia i łazienka"),
+        ('full', "Pełne"),
+    )
+
+
+@register.inclusion_tag('adverts/tags/advert_details_table.html')
+def get_advert_details(details):
+    """
+        Return details table for advert if AdvertDetails obj exists
+    """
+    heating = dict(HEATING_TYPES)[details.heating] if details.heating else "Brak danych"
+    windows = dict(WINDOWS)[details.windows] if details.windows else "Brak danych"
+    furniture = dict(FURNITURE)[details.furniture] if details.furniture else "Brak danych"
+    return {'heating': heating, 'windows': windows, 'furniture': furniture}
