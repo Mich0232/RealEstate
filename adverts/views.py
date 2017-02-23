@@ -29,14 +29,10 @@ def adverts_list(request):
         if form.is_valid():
             # Search engine
             # Filter adverts by given tags
-            tag_id = []
-            tag_id.append(form.cleaned_data['type'])
-            tag_id.append(form.cleaned_data['estate'])
+            tag_id = [form.cleaned_data['type'], form.cleaned_data['estate']]
             adverts = Advert.search.tagged_with(tag_id)
             # Filters prices
-            min_ = form.cleaned_data['price_from']
-            max_ = form.cleaned_data['price_to']
-            adverts = adverts.price_range(min_, max_)
+            adverts = adverts.price_range(form.cleaned_data['price_from'], form.cleaned_data['price_to'])
             # Location filter
             if form.cleaned_data['location']:
                 # All locations form adverts
