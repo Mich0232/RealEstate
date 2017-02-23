@@ -1,7 +1,15 @@
+import difflib
+import operator
+
+from functools import reduce
+
+from django.db.models import Q
 from django.shortcuts import render
 
 from .models import Advert, AdvertDetail
 from .forms import SearchBox
+
+from fuzzywuzzy import process as fuzzy_process
 
 
 def homepage(request):
@@ -20,18 +28,25 @@ def adverts_list(request):
         form = SearchBox(request.POST)
         if form.is_valid():
             # Search engine
+            # Filter adverts by given tags
             tag_id = []
-            max_, min_ = 0, 0
-            if form.cleaned_data['type'] != '0':
-                tag_id.append(form.cleaned_data['type'])
-            if form.cleaned_data['estate'] != '0':
-                tag_id.append(form.cleaned_data['estate'])
-            adverts = Advert.search.tagged_with(tag_id)  # Filter adverts by given tags
-            if form.cleaned_data['price_from']:
-                min_ = form.cleaned_data['price_from']
-            if form.cleaned_data['price_to']:
-                max_ = form.cleaned_data['price_to']
-            adverts = adverts.price_range(min_, max_)  # Filters prices
+            tag_id.append(form.cleaned_data['type'])
+            tag_id.append(form.cleaned_data['estate'])
+            adverts = Advert.search.tagged_with(tag_id)
+            # Filters prices
+            min_ = form.cleaned_data['price_from']
+            max_ = form.cleaned_data['price_to']
+            adverts = adverts.price_range(min_, max_)
+            # Location filter
+            if form.cleaned_data['location']:
+                # All locations form adverts
+                locations = set([location.split(',')[0] for location in list(adverts.values_list('location',
+                                                                                                 flat=True))])
+                best_locations = difflib.get_close_matches(form.cleaned_data['location'], locations)
+                if best_locations:
+                    # If possible match was found
+                    query = reduce(operator.or_, [Q(location__contains=loc) for loc in best_locations])
+                    adverts = adverts.filter(query)
         else:
             adverts = Advert.objects.all()
     else:

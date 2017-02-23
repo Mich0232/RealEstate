@@ -18,8 +18,9 @@ class SearchQueryset(models.QuerySet):
 
     def tagged_with(self, tag_id):
         query = self
-        if tag_id:
-            for id_ in tag_id:
+        tags = [x for x in tag_id if int(x)]
+        if tags:
+            for id_ in tags:
                 query = query.filter(tags__exact=id_)
         return query
 

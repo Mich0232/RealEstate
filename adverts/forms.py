@@ -1,6 +1,8 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
+from .models import Advert
+
 
 class SearchBox(forms.Form):
     """
@@ -26,6 +28,8 @@ class SearchBox(forms.Form):
                                     widget=forms.NumberInput(attrs={'class': 'form-control'}))
     price_to = forms.IntegerField(label="Cena max", min_value=0, required=False,
                                   widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    location = forms.CharField(label='Miasto', required=False,
+                               widget=forms.TextInput(attrs={'class': 'form-control'}))
 
     def clean_price_to(self):
         price_to = self.cleaned_data['price_to']

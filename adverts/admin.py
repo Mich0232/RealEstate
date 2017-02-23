@@ -34,7 +34,6 @@ class AdvertAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         """ Custom save due to assigning correct tags """
         form.cleaned_data['tags'] = form.cleaned_data['tags'][0].split('-')
-        print(form.cleaned_data['tags'])
         obj.save()
 
 
