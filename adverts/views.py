@@ -19,8 +19,8 @@ def homepage(request):
 
 def adverts_list(request):
     """
-        List of all adverts view. With filtering form.
-        User can filter by type of advert, type of estate, price range, and location (city).
+        List of all adverts, with filtering form.
+        User can filter by: type of advert, type of estate, price range, and location (city).
         If location is given - it search for best match in locations of all adverts.
     """
     # TODO: Scaling for mobile

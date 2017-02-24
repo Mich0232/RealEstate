@@ -45,3 +45,4 @@ fabric.properties
 
 /adverts/static/img/
 /db.sqlite3
+/RealEstate/settings.py
