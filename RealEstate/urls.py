@@ -23,7 +23,10 @@ from adverts import views as adverts_views
 urlpatterns = [
     url(r'^$', adverts_views.homepage, name='homepage_url'),
     url(r'^admin/', admin.site.urls),
+    url(r'^contact/$', adverts_views.contact, name='contact_url'),
     url(r'^adverts/$', adverts_views.adverts_list, name='advert_list_url'),
+    url(r'^add-advert/$', adverts_views.advert_add, name='advert_add'),
+    url(r'^add-advert/success/$', adverts_views.advert_add_success, name='advert_add_success'),
     url(r'^adverts/(?P<advert_id>\d+)/$', adverts_views.advert_details, name='advert_details_url'),
 ]
 

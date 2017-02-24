@@ -21,7 +21,7 @@
 
                       {% for photo in images %}
                           <div class="item {% if photo.thumbnail %}{{ "active"|default:"" }}{% endif %}">
-                              <img src="{{ photo.image.url }}" alt="Zdjęcie nie dostępne" class="img-responsive">
+                              <img src="{{ photo.image.url }}" alt="Zdjęcie nie dostępne" class="img-responsive" style="height: 440px; width: auto;">
                               <div class="carousel-caption">
 {#                                Testowa fotka#}
                               </div>

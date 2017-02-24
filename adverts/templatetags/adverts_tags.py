@@ -11,6 +11,12 @@ def nav_bar():
     pass
 
 
+@register.inclusion_tag('adverts/tags/footer.html')
+def footer_bar():
+    """ Render footer"""
+    pass
+
+
 @register.inclusion_tag('adverts/tags/search_box.html')
 def search_box():
     """ Renders search box on navigation bar """

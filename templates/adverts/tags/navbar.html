@@ -18,7 +18,8 @@
       <ul class="nav navbar-nav">
         <li><a href="{% get_advert_list_url %}">Ogłoszenia</a></li>
         <li><a href="#">Inwestycje</a></li>
-        <li><a href="#">Kontakt</a></li>
+        <li><a href="{% url 'contact_url' %}">Kontakt</a></li>
+        <li><a href="{% url 'advert_add' %}">Zgłoś ofertę</a></li>
 
       </ul>
       <ul class="nav navbar-nav navbar-right">

@@ -2,18 +2,17 @@
 {% load static %}
 
 {% block content %}
-    <div style="background-image: url({% static 'img/banner1.jpg' %});">
+    <div style="height: 550px;background-image: url({% static 'img/banner1.jpg' %});">
         <div class="container">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
-                        <div class="jumbotron">
+                        <div class="jumbotron" style="background-image: url({% static 'img/jumbotron-cover_edited.jpg' %});">
                             <h1>Szukasz domu, działki, mieszkania ?</h1>
                             <p>Sprawdź nasze oferty  </p>
                             <p><a class="btn btn-primary btn-lg" href="{% url 'advert_list_url' %}" role="button">Oferty</a></p>
                         </div>
                 </div>
             </div>
-        <hr>
         </div>
     </div>
 {% endblock %}

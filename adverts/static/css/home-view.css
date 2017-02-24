@@ -2,15 +2,26 @@ body {
     background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#aabefd)) fixed;
 }
 
+.form-hr {
+    color: gray;
+    background-color: gray;
+    border-color: gray;
+}
 
 .jumbotron {
     margin-top: 100px;
     background-color: #f4fdff;
-    color: #5a5a5a;
 }
 
 .jumbotron h1 {
     font-size: 40px;
+    color: white;
+    text-shadow: 3px 2px 22px black;
+}
+
+.jumbotron p {
+    color: white;
+    text-shadow: 3px 2px 22px black;
 }
 
 
