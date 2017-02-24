@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zgłoszenie oferty</title>
+</head>
+<body>
+    <h3>Nowe zgłoszenie ofert</h3>
+    <hr>
+    <ul>
+        <li>
+            <p>Ogłoszenie: {{ type }}</p>
+        </li>
+        <li>
+            <p>Nieruchomośc: {{ estate }}</p>
+        </li>
+        <li>
+            <p>Lokalizacja: {{ location }}</p>
+        </li>
+        <li>
+            <p>Powierzchnia: {{ size }}m2</p>
+        </li>
+        <li>
+            <p>Cena: {{ price }}zł</p>
+        </li>
+    </ul>
+    <h3>
+        Dane kontaktowe
+    </h3>
+    <hr>
+    <ul>
+        <li>
+            <p>{{ name }} {{ surname }}</p>
+        </li>
+        <li>
+            <p>TEL: {{ phone }}</p>
+        </li>
+        <li>
+            <p>E-mail: {{ email }}</p>
+        </li>
+    </ul>
+
+</body>
+</html>

@@ -10,14 +10,19 @@
                     <h2>Twoje Dane:</h2>
                     <hr class="form-hr">
                     {% for field in personal_form %}
-                        <div class="form-group {% if field.errors %}has-error{% endif %}">
+                        <div class="fieldWrapper {% if field.errors %}has-error{% endif %}">
                             <label class="form-control-label" for="{{ field.name }}" style="color: #cc2e27;">{{ field.errors.as_text }}</label>
                             {{ field|error }}
-                            <small>{{ field.help_text }}</small>
+                            {% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}
                         </div>
 
                     {% endfor %}
-
+                <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" required>
+                        Wyrażam zgodę na przetwarzanie przez pośrednika moich danych osobowych zgodnie z ustawą z dn. 29.08.1997 (Dz. U. Nr 133, poz. 883).*
+                      </label>
+                    </div>
                 </div>
                 <div class="col-md-6 col-md-offset-1">
                     <h2>Nieruchomość:</h2>
@@ -26,13 +31,13 @@
                         <div class="fieldWrapper">
                             {{ field.errors }}
                             {{ field }}
-                            <small>{{ field.help_text }}</small>
+                            {% if field.help_text|length %}<small>{{ field.help_text }}</small>{% endif %}
                         </div>
                         <br>
                     {% endfor %}
+                    <small>* - Pola wymagane</small>
                     <input class="btn btn-primary pull-right" type="submit" value="Dodaj">
                 </div>
-            <small>* - Pola wymagane</small>
             </form>
         </div>
     </div>

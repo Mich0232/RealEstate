@@ -51,14 +51,14 @@ class ReportAdvertForm(forms.Form):
         Form allows visitor to report advert, message is send via email to the site admin
     """
     ESTATE_TYPES = (
-        ('house', 'Dom'),
-        ('plot', 'Działka'),
-        ('flat', 'Mieszkanie'),
-        ('investment', 'Inwestycja'),
+        ('Dom', 'Dom'),
+        ('Działka', 'Działka'),
+        ('Mieszkanie', 'Mieszkanie'),
+        ('Inwestycja', 'Inwestycja'),
     )
     ADVERT_TYPES = (
-        ('sell', 'Sprzedaż'),
-        ('rent', 'Wynajem'),
+        ('Sprzedaż', 'Sprzedaż'),
+        ('Wynajem', 'Wynajem'),
     )
     # Visitor's data
     name = forms.CharField(label='Imię', min_length=2, max_length=20, required=True,
@@ -70,6 +70,7 @@ class ReportAdvertForm(forms.Form):
                                                                           'placeholder': 'Telefon*'}))
     email = forms.EmailField(required=False, widget=forms.EmailInput(attrs={'class': 'form-control',
                                                                             'placeholder': 'E-mail'}))
+
     # Advert data
     type = forms.ChoiceField(label='Oferta', choices=ADVERT_TYPES, required=True,
                              widget=forms.Select(attrs={'class': 'form-control'}))

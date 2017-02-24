@@ -1,0 +1,13 @@
+Nowe zgłoszenie ofert
+---------------------
+Ogłoszenie: {{ type  }}
+Nieruchomośc: {{ estate }}
+Lokalizacja: {{ location }}
+Powierzchnia: {{ size }}m2
+Cena: {{ price }}zł
+
+Dane kontaktowe
+---------------------
+{{ name }} {{ surname }}
+TEL: {{ phone }}
+E-mail: {{ email }}

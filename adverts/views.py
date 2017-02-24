@@ -5,6 +5,9 @@ from functools import reduce
 
 from django.db.models import Q
 from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
+from django.conf import settings
 
 from .models import Advert, AdvertDetail
 from .forms import SearchBox, ReportAdvertForm
@@ -80,6 +83,11 @@ def advert_add(request):
         form = ReportAdvertForm(request.POST)
         if form.is_valid():
             # Sending email with advert data
+            test_receiver = None
+            msg_html = render_to_string('adverts/mail/advert_report_message.html', form.cleaned_data)
+            msg_text = render_to_string('adverts/mail/advert_report_message.txt', form.cleaned_data)
+            send_mail('Zgłoszono nową ofertę', msg_text, settings.EMAIL_HOST_USER, [test_receiver],
+                      html_message=msg_html, fail_silently=False)
             # TODO: send mail
             return redirect(to=advert_add_success)
     fields = list(form)
