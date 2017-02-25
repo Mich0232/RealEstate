@@ -25,7 +25,7 @@ SECRET_KEY = '9@bd$qbl#pi2g+kczb@maxuwn*#wt)zvw^!9(q4rs8i#rr=jjc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 # Email config
 EMAIL_HOST = 'smtp.gmail.com'
@@ -137,3 +137,8 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media_cdn/')
 
 PHONENUMBER_DB_FORMAT = 'NATIONAL'
 PHONENUMBER_DEFAULT_REGION = 'PL'
+
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 0
+

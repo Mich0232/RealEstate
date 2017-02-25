@@ -30,5 +30,6 @@ urlpatterns = [
     url(r'^adverts/(?P<advert_id>\d+)/$', adverts_views.advert_details, name='advert_details_url'),
 ]
 
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

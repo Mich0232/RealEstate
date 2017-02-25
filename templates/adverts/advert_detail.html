@@ -21,9 +21,8 @@
 
                       {% for photo in images %}
                           <div class="item {% if photo.thumbnail %}{{ "active"|default:"" }}{% endif %}">
-                              <img src="{{ photo.image.url }}" alt="Zdjęcie nie dostępne" class="img-responsive" style="height: 440px; width: auto;">
+                              <img src="{{ photo.image.url }}" alt="Zdjęcie niedostępne" class="img-responsive" style="height: 440px; width: auto;">
                               <div class="carousel-caption">
-{#                                Testowa fotka#}
                               </div>
                         </div>
                       {% endfor %}
@@ -44,7 +43,7 @@
             <div class="col-md-4">
                 <div class="row">
                     <div class="panel panel-primary">
-                      <div class="panel-heading">{{ advert.title }}</div>
+                      <div class="panel-heading">{{ advert.title }}{% if request.user.is_superuser %} - Wyświetlenia: ({{ total_views|default:'0' }}){% endif %}</div>
                       <div class="panel-body">
                         {{ advert.description|linebreaks|safe }}
                       </div>

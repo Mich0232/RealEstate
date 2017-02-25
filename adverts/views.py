@@ -1,16 +1,24 @@
 import difflib
 import operator
 
+import redis
 from functools import reduce
 
 from django.db.models import Q
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404, render_to_response
 from django.template.loader import render_to_string
+from django.template import RequestContext
 from django.core.mail import send_mail
 from django.conf import settings
 
 from .models import Advert, AdvertDetail
 from .forms import SearchBox, ReportAdvertForm
+
+
+# Redis database connection
+r = redis.StrictRedis(host=settings.REDIS_HOST,
+                      port=settings.REDIS_PORT,
+                      db=settings.REDIS_DB)
 
 
 def homepage(request):
@@ -64,13 +72,20 @@ def advert_details(request, advert_id):
     """
         Renders view with Advert info, images carousel and details table.
         Takes Advert object ID.
+        Returns 404 error if advert was not found.
     """
-    advert = Advert.objects.get(id=advert_id)
+    advert = get_object_or_404(Advert, id=advert_id)
     images = advert.images.all()
     details = AdvertDetail.objects.get(advert_ptr_id=advert.id)
-    return render(request, template_name='adverts/advert_detail.html', context={'advert': advert,
-                                                                                'images': images,
-                                                                                'details': details})
+    # Template context dict
+    context = {'advert': advert, 'images': images, 'details': details}
+
+    if not request.user.is_superuser:
+        # Visitors counter is incremented only if user is not superuser
+        total_views = r.incr('advert:{}:views'.format(advert_id))
+        context['total_views'] = total_views
+
+    return render(request, template_name='adverts/advert_detail.html', context=context)
 
 
 def advert_add(request):
@@ -83,12 +98,12 @@ def advert_add(request):
         form = ReportAdvertForm(request.POST)
         if form.is_valid():
             # Sending email with advert data
-            test_receiver = None
-            msg_html = render_to_string('adverts/mail/advert_report_message.html', form.cleaned_data)
-            msg_text = render_to_string('adverts/mail/advert_report_message.txt', form.cleaned_data)
-            send_mail('Zgłoszono nową ofertę', msg_text, settings.EMAIL_HOST_USER, [test_receiver],
-                      html_message=msg_html, fail_silently=False)
-            # TODO: send mail
+            # TODO: Send mail as Celery task
+            # test_receiver = None
+            # msg_html = render_to_string('adverts/mail/advert_report_message.html', form.cleaned_data)
+            # msg_text = render_to_string('adverts/mail/advert_report_message.txt', form.cleaned_data)
+            # send_mail('Zgłoszono nową ofertę', msg_text, settings.EMAIL_HOST_USER, [test_receiver],
+            #           html_message=msg_html, fail_silently=False)
             return redirect(to=advert_add_success)
     fields = list(form)
     personal_form, estate_form = fields[:4], fields[4:]

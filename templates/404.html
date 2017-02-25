@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="container" style="margin-top: 100px;min-height: 400px;">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h1>Przepraszamy, oferta nie została znaleziona...</h1>
+                <hr>
+                <p><button class="btn btn-primary"><a href="{% url 'advert_list_url' %}" style="color: #f4fdff">Lista ogłoszeń</a></button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
