@@ -5,15 +5,12 @@ import redis
 from functools import reduce
 
 from django.db.models import Q
-from django.shortcuts import render, redirect, get_object_or_404, render_to_response
-from django.template.loader import render_to_string
-from django.template import RequestContext
-from django.core.mail import send_mail
+from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
 
 from .models import Advert, AdvertDetail
 from .forms import SearchBox, ReportAdvertForm
-
+from .tasks import advert_add_mail
 
 # Redis database connection
 r = redis.StrictRedis(host=settings.REDIS_HOST,
@@ -100,11 +97,7 @@ def advert_add(request):
         if form.is_valid():
             # Sending email with advert data
             # TODO: Send mail as Celery task
-            # test_receiver = None
-            # msg_html = render_to_string('adverts/mail/advert_report_message.html', form.cleaned_data)
-            # msg_text = render_to_string('adverts/mail/advert_report_message.txt', form.cleaned_data)
-            # send_mail('Zgłoszono nową ofertę', msg_text, settings.EMAIL_HOST_USER, [test_receiver],
-            #           html_message=msg_html, fail_silently=False)
+            advert_add_mail.delay(form.cleaned_data)  # asynchronous task
             return redirect(to=advert_add_success)
 
     fields = list(form)
@@ -125,7 +118,3 @@ def advert_add_success(request):
         Renders after 'advert_add' form is successfully submitted.
     """
     return render(request, template_name='adverts/report_advert_success.html')
-
-
-def new_func(request):
-    pass
