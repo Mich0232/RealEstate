@@ -96,6 +96,7 @@ def advert_add(request):
     form = ReportAdvertForm()
     if request.method == 'POST':
         form = ReportAdvertForm(request.POST)
+
         if form.is_valid():
             # Sending email with advert data
             # TODO: Send mail as Celery task
@@ -105,6 +106,7 @@ def advert_add(request):
             # send_mail('Zgłoszono nową ofertę', msg_text, settings.EMAIL_HOST_USER, [test_receiver],
             #           html_message=msg_html, fail_silently=False)
             return redirect(to=advert_add_success)
+
     fields = list(form)
     personal_form, estate_form = fields[:4], fields[4:]
     return render(request, template_name='adverts/report_advert.html', context={'personal_form': personal_form,
