@@ -125,3 +125,7 @@ def advert_add_success(request):
         Renders after 'advert_add' form is successfully submitted.
     """
     return render(request, template_name='adverts/report_advert_success.html')
+
+
+def new_func(request):
+    pass
