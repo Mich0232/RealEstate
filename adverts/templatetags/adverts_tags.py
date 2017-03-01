@@ -47,10 +47,12 @@ def get_advert_thumbnail(advert):
 
 
 @register.assignment_tag()
-def new_line_advert(loop, per_row=3):
+def new_line_advert(loop, mobile=False):
     """
         Return True if current Advert needs to be in new row (3 Adverts per row)
+        Is middleware detects mobile browser then there are 2 Adverts per row
     """
+    per_row = 2 if mobile else 3
     return True if loop % per_row == 0 else False
 
 

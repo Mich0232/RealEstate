@@ -38,10 +38,14 @@ class SearchBox(forms.Form):
                                widget=forms.TextInput(attrs={'class': 'form-control'}))
 
     def clean_price_to(self):
-        price_to = self.cleaned_data['price_to']
+        """ Price_to must be greater then Price_from
+        """
+        price_to = self.cleaned_data.get('price_to')
         if price_to:
-            if self.cleaned_data['price_from']:
-                if int(price_to) <= int(self.cleaned_data['price_from']):
+            price_form = self.cleaned_data.get('price_from')
+            if price_form:
+                if int(price_to) <= int(price_form):
+                    #  Price range is invalid
                     raise ValidationError("Zakres cenowy jest niepoprawny")
         return price_to
 

@@ -2,6 +2,7 @@
 {% load static %}
 {% load adverts_tags %}
 {% load humanize %}
+{% load user_agents %}
 
 {% block content %}
 <div class="container" style="margin-top: 100px;">
@@ -41,21 +42,26 @@
     </form>
 </div>
 <hr>
-{% if error %}
+{% if errors %}
     <div class="container">
+    {% for error in errors %}
         <div class="row">
             <div class="alert alert-warning alert-dismissible" role="alert">
               <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <strong>Przepraszamy!</strong>  Nie znaleziono ofert w lokalizacji '{{ error }}'.
+              <strong>Przepraszamy!</strong> {{ error }}
             </div>
         </div>
+    {% endfor %}
+        <strong>Oferty w innych lokalizacjach: </strong>
+    <hr class="form-hr">
     </div>
 
 {% endif %}
 </div>
+    {% with request|is_mobile as mobile %}
 <div class="container">
     {% for advert in adverts %}
-        {% new_line_advert forloop.counter as new_line %}
+        {% new_line_advert forloop.counter mobile as new_line %}
         {% if new_line or forloop.first %}
 
             <div class="row">
@@ -85,6 +91,6 @@
             </div>
     {% endfor %}
 </div>
-
+    {% endwith %}
 {% endblock %}
 

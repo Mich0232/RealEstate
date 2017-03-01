@@ -31,7 +31,6 @@ def adverts_list(request):
         User can filter by: type of advert, type of estate, price range, and location (city).
         If location is given - it search for best match in locations of all adverts.
     """
-    # TODO: Scaling for mobile
     form = SearchBox()
     if request.method == 'POST':
         form = SearchBox(request.POST)
@@ -42,6 +41,7 @@ def adverts_list(request):
             adverts = Advert.search.tagged_with(selected_tags)
             # Filters prices
             adverts = adverts.price_range(form.cleaned_data['price_from'], form.cleaned_data['price_to'])
+
             # Location filter
             if form.cleaned_data['location']:
                 # All locations (cities) form adverts
@@ -52,13 +52,23 @@ def adverts_list(request):
                     # If possible match was found
                     query = reduce(operator.or_, [Q(location__contains=loc) for loc in best_locations])
                     adverts = adverts.filter(query)
+
                 else:
                     # Location not found message
-                    error = form.cleaned_data['location']
+                    errors = list(form.errors.values())
+                    errors.append("Nie znaleziono ofert w lokalizacji '{}'.".format(
+                        form.cleaned_data.get('location')))
+
                     return render(request, template_name='adverts/advert_list.html',
-                                  context={'form': form, 'adverts': adverts, 'error': error})
+                                  context={'form': form, 'adverts': adverts, 'errors': errors})
         else:
+            #  If form is invalid
             adverts = Advert.objects.all()
+            errors = list(form.errors.values())
+
+            return render(request, template_name='adverts/advert_list.html', context={'form': form,
+                                                                                      'adverts': adverts,
+                                                                                      'errors': errors})
     else:
         adverts = Advert.objects.all()
     return render(request, template_name='adverts/advert_list.html', context={'form': form,
@@ -96,7 +106,6 @@ def advert_add(request):
 
         if form.is_valid():
             # Sending email with advert data
-            # TODO: Send mail as Celery task
             advert_add_mail.delay(form.cleaned_data)  # asynchronous task
             return redirect(to=advert_add_success)
 
