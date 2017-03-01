@@ -76,12 +76,13 @@ class Advert(models.Model):
 
 
 def upload_directory(instance, filename):
+    """ Return upload directory for images """
     return "%s/%s" % (instance.pk, filename)
 
 
 class Images(models.Model):
     """
-        Image model for Advert photo gallery. (thumbnail can only be one per Advert)
+        Image model for Advert photo gallery. (There can only be one thumbnail per Advert)
     """
     advert = models.ForeignKey(Advert, related_name='images', default=None)
     image = models.ImageField(upload_to=upload_directory, height_field='height_field',
