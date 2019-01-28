@@ -1,7 +1,7 @@
 from django.db import models
-from django.core.urlresolvers import reverse
+from django.shortcuts import reverse
 
-from taggit.managers import TaggableManager
+# from taggit.managers import TaggableManager
 
 
 class SearchQueryset(models.QuerySet):
@@ -64,7 +64,7 @@ class Advert(models.Model):
 
     # Managers
     objects = models.Manager()
-    tags = TaggableManager()
+    # tags = TaggableManager()
     search = SearchManager()
 
     def __str__(self):
@@ -84,7 +84,7 @@ class Images(models.Model):
     """
         Image model for Advert photo gallery. (There can only be one thumbnail per Advert)
     """
-    advert = models.ForeignKey(Advert, related_name='images', default=None)
+    advert = models.ForeignKey(Advert, related_name='images', on_delete=models.CASCADE)
     image = models.ImageField(upload_to=upload_directory, height_field='height_field',
                               width_field='width_field', verbose_name="Zdjęcie")
     height_field = models.IntegerField(default=0)

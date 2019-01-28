@@ -48,8 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django_user_agents',
-    'phonenumber_field',
-    'taggit',
+    # 'phonenumber_field',
+    # 'taggit',
     'adverts',
     'rest_framework',
 ]
@@ -93,8 +93,12 @@ WSGI_APPLICATION = 'RealEstate.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'realestate',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 

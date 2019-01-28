@@ -19,22 +19,22 @@ class AdvertAdmin(admin.ModelAdmin):
     inlines = [AdvertImage, ]
     fieldsets = (
         (None, {
-            'fields': ('title', 'description', 'location', 'type', 'estate', 'size', 'plot_size', 'price', 'tags')
+            'fields': ('title', 'description', 'location', 'type', 'estate', 'size', 'plot_size', 'price')
         }),
         ('Więcej', {
             'classes': ('collapse',),
             'fields': ('heating', 'windows', 'furniture', 'balcony')
         })
     )
-    prepopulated_fields = {'tags': ('type', 'estate',)}
+    # prepopulated_fields = {'tags': ('type', 'estate',)}
     ordering = ['-updated']
     list_filter = ('type', 'estate', 'heating', 'furniture')
     search_fields = ('location', )
-
-    def save_model(self, request, obj, form, change):
-        """ Custom save due to assigning correct tags """
-        form.cleaned_data['tags'] = form.cleaned_data['tags'][0].split('-')
-        obj.save()
+    #
+    # def save_model(self, request, obj, form, change):
+    #     """ Custom save due to assigning correct tags """
+    #     form.cleaned_data['tags'] = form.cleaned_data['tags'][0].split('-')
+    #     obj.save()
 
 
 admin.site.register(AdvertDetail, AdvertAdmin)

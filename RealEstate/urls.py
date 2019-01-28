@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^contact/$', contact_view, name='contact_url'),
     url(r'^adverts/', include('adverts.urls')),
-    url(r'^api/', include('adverts.api.urls', namespace='api')),
+    url(r'^api/', include('adverts.api.urls')),
 ]
 
 

@@ -2,7 +2,7 @@ from django import forms
 from django.utils.translation import ugettext_lazy
 from django.core.exceptions import ValidationError
 
-from phonenumber_field.formfields import PhoneNumberField
+# from phonenumber_field.formfields import PhoneNumberField
 
 
 forms.Field.default_error_messages = {
@@ -69,7 +69,7 @@ class ReportAdvertForm(forms.Form):
                            widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Imię*'}))
     surname = forms.CharField(label='Nazwisko', min_length=2, max_length=20, required=True,
                               widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nazwisko*'}))
-    phone = PhoneNumberField(label="Telefon", help_text='Bez spacji i/lub znaków specjalnych',
+    phone = forms.CharField(label="Telefon", help_text='Bez spacji i/lub znaków specjalnych',
                              required=True, widget=forms.TextInput(attrs={'class': 'form-control',
                                                                           'placeholder': 'Telefon*'}))
     email = forms.EmailField(required=False, widget=forms.EmailInput(attrs={'class': 'form-control',
