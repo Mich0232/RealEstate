@@ -62,6 +62,7 @@ class Advert(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Cena (zł)')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    details = models.OneToOneField('adverts.AdvertDetail', on_delete=models.CASCADE, null=True)
 
     # Managers
     objects = models.Manager()
@@ -122,8 +123,15 @@ class AdvertDetail(Advert):
     windows = models.CharField(max_length=8, choices=WINDOWS, blank=True, null=True, verbose_name='Okna')
     furniture = models.CharField(max_length=4, choices=FURNITURE, blank=True, null=True, verbose_name='Umeblowanie')
     balcony = models.BooleanField(blank=True, verbose_name="Balkon")
+    statues = models.ForeignKey('adverts.AdvertStatus', on_delete=models.SET_NULL, null=True)
 
     class Meta:
         ordering = ('type', )
         verbose_name = 'Oferta'
         verbose_name_plural = 'Oferty'
+
+
+class AdvertStatus(models.Model):
+    name = models.CharField(max_length=5, null=True)
+    created = models.DateTimeField(null=True)
+    on_profile = models.ForeignKey('auth.User', on_delete=models.SET_NULL, null=True)
