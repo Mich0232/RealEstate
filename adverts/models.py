@@ -51,6 +51,7 @@ class Advert(models.Model):
         ('sell', 'Sprzedaż'),
         ('rent', 'Wynajem'),
     )
+    owner = models.ForeignKey('auth.User', related_name='adverts', on_delete=models.CASCADE)
     title = models.CharField(max_length=250, verbose_name='Tytuł')
     description = models.TextField(max_length=2000, verbose_name='Opis')
     location = models.CharField(max_length=30, verbose_name='Lokacja', blank=True)
@@ -68,7 +69,7 @@ class Advert(models.Model):
     search = SearchManager()
 
     def __str__(self):
-        return "({}) - {} | {}m2 | {}zł".format(dict(self.ESTATE_TYPES)[self.estate],
+        return "({}) - {} | {}m2 | {}zł".format(self.get_estate_display(),
                                                 self.location, self.size, self.price)
 
     def get_absolute_url(self):

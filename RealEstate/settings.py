@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django_user_agents',
+    'django_extensions',
     # 'phonenumber_field',
     # 'taggit',
     'adverts',
