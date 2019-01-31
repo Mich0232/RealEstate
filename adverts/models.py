@@ -123,7 +123,7 @@ class AdvertDetail(Advert):
     windows = models.CharField(max_length=8, choices=WINDOWS, blank=True, null=True, verbose_name='Okna')
     furniture = models.CharField(max_length=4, choices=FURNITURE, blank=True, null=True, verbose_name='Umeblowanie')
     balcony = models.BooleanField(blank=True, verbose_name="Balkon")
-    statues = models.ForeignKey('adverts.AdvertStatus', on_delete=models.SET_NULL, null=True)
+    statuses = models.ForeignKey('adverts.AdvertStatus', on_delete=models.SET_NULL, null=True)
 
     class Meta:
         ordering = ('type', )
