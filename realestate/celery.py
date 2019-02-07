@@ -7,10 +7,10 @@ from celery import Celery
 from django.conf import settings
 
 #  Default Celery settings module
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'RealEstate.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'realestate.settings')
 
 #  Celery app
-app = Celery('RealEstate')
+app = Celery('realestate')
 
 #  load settings
 app.config_from_object('django.conf:settings')

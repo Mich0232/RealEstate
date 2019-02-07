@@ -14,7 +14,7 @@ import os
 
 from adverts.models import Advert
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "RealEstate.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "realestate.settings")
 
 import django
 django.setup()

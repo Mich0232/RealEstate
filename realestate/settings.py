@@ -50,7 +50,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'RealEstate.wsgi.application'
+WSGI_APPLICATION = 'realestate.wsgi.application'
 
 
 # Database
