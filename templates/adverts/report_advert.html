@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load adverts_filters %}
 
 {% block content %}
     <div class="container" style="margin-top: 100px;">
@@ -12,7 +11,7 @@
                     {% for field in personal_form %}
                         <div class="fieldWrapper {% if field.errors %}has-error{% endif %}">
                             <label class="form-control-label" for="{{ field.name }}" style="color: #cc2e27;">{{ field.errors.as_text }}</label>
-                            {{ field|error }}
+                            {{ field }}
                             {% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}
                         </div>
 
@@ -31,7 +30,7 @@
                         <div class="fieldWrapper">
                             {{ field.errors }}
                             {{ field }}
-                            {% if field.help_text|length %}<small>{{ field.help_text }}</small>{% endif %}
+                            {% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}
                         </div>
                         <br>
                     {% endfor %}
