@@ -47,14 +47,8 @@ fabric.properties
 /db.sqlite3
 /local_settings.py
 
+
 /venv/
 
 .idea
 __pycache__/
-
-.ebextensions
-
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
