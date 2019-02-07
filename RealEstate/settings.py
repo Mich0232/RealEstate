@@ -15,27 +15,9 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '9@bd$qbl#pi2g+kczb@maxuwn*#wt)zvw^!9(q4rs8i#rr=jjc'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
-# Email config
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'usermail@gmail.xyz'
-EMAIL_HOST_PASSWORD = 'password'
-EMAIL_POST = 587
-EMAIL_USE_TLS = True
-
-EMAIL_RECEIVER = 'testmail@abc.xyz'
-
+DEBUG = True
 
 # Application definition
 
@@ -95,9 +77,9 @@ WSGI_APPLICATION = 'RealEstate.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'realestate',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
+        'NAME': '-',
+        'USER': '-',
+        'PASSWORD': '-',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -145,9 +127,9 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media_cdn/')
-
-PHONENUMBER_DB_FORMAT = 'NATIONAL'
-PHONENUMBER_DEFAULT_REGION = 'PL'
+#
+# PHONENUMBER_DB_FORMAT = 'NATIONAL'
+# PHONENUMBER_DEFAULT_REGION = 'PL'
 
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
@@ -159,3 +141,8 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
     ]
 }
+
+try:
+     from local_settings import *
+except ImportError:
+    pass
