@@ -46,9 +46,13 @@ fabric.properties
 /adverts/static/img/
 /db.sqlite3
 /local_settings.py
+dev_settings.py
 
+.ebextensions
+.
 
 /venv/
 
 .idea
 __pycache__/
+.elasticbeanstalk/

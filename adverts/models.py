@@ -135,3 +135,9 @@ class AdvertStatus(models.Model):
     name = models.CharField(max_length=5, null=True)
     created = models.DateTimeField(null=True)
     on_profile = models.ForeignKey('auth.User', on_delete=models.SET_NULL, null=True)
+
+
+class AdvertOpinion(models.Model):
+    advert = models.ForeignKey('adverts.AdvertDetail', on_delete=models.CASCADE, related_name='opinions')
+    content = models.CharField(max_length=2000)
+    rate = models.IntegerField(default=3)

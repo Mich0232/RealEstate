@@ -45,6 +45,7 @@ fabric.properties
 
 /adverts/static/img/
 /db.sqlite3
+dev_settings.py
 
 /venv/
 
