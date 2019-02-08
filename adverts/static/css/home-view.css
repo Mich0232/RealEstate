@@ -1,84 +1,127 @@
-body {
-    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#aabefd)) fixed;
+html, body{
+    background-color: whitesmoke;
+    height: 100%;
 }
 
-.form-hr {
-    color: gray;
-    background-color: gray;
-    border-color: gray;
+/* Top filters*/
+.navbar-filters{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 10%;
+    border-bottom: lightgrey 2px solid;
 }
 
-.jumbotron {
-    margin-top: 100px;
-    background-color: #f4fdff;
+.navbar-filters .city-filters{
+
 }
 
-.jumbotron h1 {
-    font-size: 40px;
-    color: white;
-    text-shadow: 3px 2px 22px black;
+.city-filters .city-button{
+    margin: 0 5px 0;
+    background-color: white;
+    padding: 10px 30px 10px;
+    border-radius: 5px;
+    border-color: white;
 }
 
-.jumbotron p {
-    color: white;
-    text-shadow: 3px 2px 22px black;
+.city-button:hover{
+    box-shadow: 0 2px 15px -3px greenyellow;
+}
+
+/*All except filters*/
+.content-row {
+    height: 90%
 }
 
 
-.navbar {
-    background-image: linear-gradient(to bottom,#337ab7 0,#265a88 100%);
+.map-wrapper {
+    padding: 10px 0 10px;
+    width: 100%;
+    height: 100%;
 }
 
-.navbar-default {
-  border-color: #aabefd;
+.map-wrapper .map{
+    width: inherit;
+    height: inherit;
 }
 
-.navbar-default .navbar-brand {
-  color: #dccdf6;
+.advert-list{
+    padding: 5px;
+    list-style: none;
 }
-.navbar-default .navbar-brand:hover,
-.navbar-default .navbar-brand:focus {
-  color: #bdadd7;
+
+.advert-list-row{
+    padding: 10px;
+    margin: 10px;
+    height: 100px;
+    background-color: white;
+    border-radius: 10px;
 }
-.navbar-default .navbar-text {
-  color: #dccdf6;
+
+.advert-list-row:hover{
+    box-shadow: 0 2px 20px -3px greenyellow;
 }
-.navbar-default .navbar-nav > li > a {
-  color: #dccdf6;
+
+.advert-list-row-title{
+    height: 40%;
+    padding: 5px 5px 0;
+    /*border: 2px solid greenyellow;*/
+    display: flex;
 }
-.navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav > li > a:focus {
-  color: #dccdf6;
+
+.advert-list-row-title .advert-title{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: large;
+    /*border: 2px solid red;*/
 }
-.navbar-default .navbar-nav > .active > a,
-.navbar-default .navbar-nav > .active > a:hover,
-.navbar-default .navbar-nav > .active > a:focus {
-  color: #dccdf6;
-  background-color: #dccdf6;
+
+.advert-list-row-address{
+    padding-left: 5px;
+    height: 20%;
 }
-.navbar-default .navbar-nav > .open > a,
-.navbar-default .navbar-nav > .open > a:hover,
-.navbar-default .navbar-nav > .open > a:focus {
-  color: #dccdf6;
-  background-color: #445aad;
+
+.advert-list-row-address .advert-address{
+    /*border: 2px solid yellow;*/
+    font-style: italic;
+    font-size: medium;
 }
-.navbar-default .navbar-toggle {
-  border-color: #445aad;
+
+.advert-list-row-info{
+    padding: 5px;
+    height: 40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-.navbar-default .navbar-toggle:hover,
-.navbar-default .navbar-toggle:focus {
-  background-color: #445aad;
+
+.advert-list-row-info .advert-price{
+    color: lightgreen;
 }
-.navbar-default .navbar-toggle .icon-bar {
-  background-color: #3c3c3c;
+
+.advert-list-row-info .advert-date{
+    font-size: small;
 }
-.navbar-default .navbar-collapse,
-.navbar-default .navbar-form {
-  border-color: #3c3c3c;
+
+
+/* Filters, Adverts, Map*/
+.page-body {
+    height: 90%;
 }
-.navbar-default .navbar-link {
-  color: #dccdf6;
+
+footer{
+    border-top: lightgrey 1px solid;
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-/*.navbar-default .navbar-link:hover {*/
-  /*color: #de3024;*/
-/*}*/
+
+.footer-content{
+    padding: 15px;
+    font-size: small;
+}

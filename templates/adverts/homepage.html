@@ -1,18 +1,49 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
+{% load advert_tags %}
 
 {% block content %}
-    <div style="height: 550px;background-image: url({% static 'img/banner1.jpg' %});">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                        <div class="jumbotron" style="background-image: url({% static 'img/jumbotron-cover_edited.jpg' %});">
-                            <h1>Szukasz domu, działki, mieszkania ?</h1>
-                            <p>Sprawdź nasze oferty  </p>
-                            <p><a class="btn btn-primary btn-lg" href="{% url 'advert_list_url' %}" role="button">Oferty</a></p>
-                        </div>
-                </div>
+    <div class="row navbar-filters">
+        <div class="col">
+            <div class="city-filters">
+                {% for location in locations %}
+                    <button class="city-button">{{ location }}</button>
+{#                    <span style="padding: 10px;">{{ location }}</span>#}
+                {% endfor %}
             </div>
         </div>
     </div>
+    <div class="row content-row">
+        <div class="col-6" id="advert-list-column">
+            <ul class="advert-list">
+                {% for advert in adverts %}
+                    <li class="advert-list-row">
+                        <div class="advert-list-row-title">
+                            <span class="advert-title">{{ advert.title }}</span>
+                        </div>
+                        <div class="advert-list-row-address">
+                            <span class="advert-address">Pawia 9, Kraków</span>
+                        </div>
+                        <div class="advert-list-row-info">
+                            <div>
+                                <span class="advert-price">{{ advert.price|floatformat|intcomma }}zł</span>
+                                <span class="advert-icon"><i class="fas fa-home"></i></span>
+                            </div>
+                            <div>
+                                <span class="advert-date">{{ advert.created_at|display_date }}</span>
+                            </div>
+                        </div>
+
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-6" id="map-column">
+            <div class="map-wrapper">
+                <iframe class="map" src="https://maps.google.com/maps?hl=en&amp;q=Krakow+(Krakow)&amp;ie=UTF8&amp;t=&amp;z=10&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

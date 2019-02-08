@@ -1,40 +1,13 @@
 from django.contrib import admin
+from django.contrib.admin.decorators import register
 
-from .models import Images, AdvertDetail
+from .models import Advert
 
-
-class AdvertImage(admin.TabularInline):
+@register(Advert)
+class Advert(admin.ModelAdmin):
     """
         Advert additional images objects
     """
-    model = Images
-    extra = 1
-    exclude = ['height_field', 'width_field']
-
-
-class AdvertAdmin(admin.ModelAdmin):
-    """
-        Advert models admin
-    """
-    inlines = [AdvertImage, ]
-    fieldsets = (
-        (None, {
-            'fields': ('title', 'description', 'location', 'type', 'estate', 'size', 'plot_size', 'price')
-        }),
-        ('Więcej', {
-            'classes': ('collapse',),
-            'fields': ('heating', 'windows', 'furniture', 'balcony')
-        })
-    )
-    # prepopulated_fields = {'tags': ('type', 'estate',)}
-    ordering = ['-updated']
-    list_filter = ('type', 'estate', 'heating', 'furniture')
-    search_fields = ('location', )
-    #
-    # def save_model(self, request, obj, form, change):
-    #     """ Custom save due to assigning correct tags """
-    #     form.cleaned_data['tags'] = form.cleaned_data['tags'][0].split('-')
-    #     obj.save()
-
-
-admin.site.register(AdvertDetail, AdvertAdmin)
+    class Meta:
+        model = Advert
+        exclude = []
