@@ -9,7 +9,6 @@
             <div class="city-filters">
                 {% for location in locations %}
                     <button class="city-button">{{ location }}</button>
-{#                    <span style="padding: 10px;">{{ location }}</span>#}
                 {% endfor %}
             </div>
         </div>
@@ -18,7 +17,7 @@
         <div class="col-6" id="advert-list-column">
             <ul class="advert-list">
                 {% for advert in adverts %}
-                    <li class="advert-list-row">
+                    <li class="advert-list-row" data-index="{{ forloop.counter0 }}">
                         <div class="advert-list-row-title">
                             <span class="advert-title">{{ advert.title }}</span>
                         </div>
@@ -41,7 +40,8 @@
         </div>
         <div class="col-6" id="map-column">
             <div class="map-wrapper">
-                <iframe class="map" src="https://maps.google.com/maps?hl=en&amp;q=Krakow+(Krakow)&amp;ie=UTF8&amp;t=&amp;z=10&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                <div class="map" id="mapid"></div>
+{#                <iframe class="map" src="https://maps.google.com/maps?hl=en&amp;q=Krakow+(Krakow)&amp;ie=UTF8&amp;t=&amp;z=10&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>#}
             </div>
         </div>
     </div>

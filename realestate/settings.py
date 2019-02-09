@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'adverts',
     'rest_framework',
+    'geo',
 ]
 
 MIDDLEWARE = [

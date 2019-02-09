@@ -56,3 +56,6 @@ dev_settings.py
 .idea
 __pycache__/
 .elasticbeanstalk/
+setup.js
+
+/static

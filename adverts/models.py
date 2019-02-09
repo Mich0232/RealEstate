@@ -19,4 +19,5 @@ class Advert(models.Model):
     price = models.DecimalField(max_digits=8, decimal_places=2, default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     estate_type = models.CharField(max_length=10, choices=ESTATE_TYPES)
+    address = models.ForeignKey('geo.Address', on_delete=models.SET_NULL, null=True, related_name='adverts')
 
