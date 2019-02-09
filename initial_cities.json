@@ -1,0 +1,29 @@
+[
+  {
+    "model": "geo.city",
+    "pk": 1,
+    "fields": {
+      "name": "Krak\u00f3w",
+      "state": "Ma\u0142opolskie",
+      "country": 1
+    }
+  },
+  {
+    "model": "geo.city",
+    "pk": 2,
+    "fields": {
+      "name": "Warszawa",
+      "state": "Mazowieckie",
+      "country": 1
+    }
+  },
+  {
+    "model": "geo.city",
+    "pk": 3,
+    "fields": {
+      "name": "Wroc\u0142aw",
+      "state": "Dolno\u015bl\u0105skie",
+      "country": 1
+    }
+  }
+]

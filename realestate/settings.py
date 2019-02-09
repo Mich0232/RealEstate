@@ -123,6 +123,10 @@ REST_FRAMEWORK = {
     ]
 }
 
+FIXTURE_DIRS = (
+    os.path.join(os.path.dirname(BASE_DIR), 'fixtures/')
+)
+
 try:
      from local_settings import *
 except ImportError:

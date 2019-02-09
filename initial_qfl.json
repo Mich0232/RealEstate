@@ -1,0 +1,29 @@
+[
+  {
+    "model": "geo.quickfilterlocation",
+    "pk": 1,
+    "fields": {
+      "city": 1,
+      "lat": "50.064651",
+      "lng": "19.944981"
+    }
+  },
+  {
+    "model": "geo.quickfilterlocation",
+    "pk": 2,
+    "fields": {
+      "city": 2,
+      "lat": "52.229675",
+      "lng": "21.012230"
+    }
+  },
+  {
+    "model": "geo.quickfilterlocation",
+    "pk": 3,
+    "fields": {
+      "city": 3,
+      "lat": "51.107883",
+      "lng": "17.038538"
+    }
+  }
+]

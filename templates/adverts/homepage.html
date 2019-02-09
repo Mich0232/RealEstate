@@ -8,7 +8,7 @@
         <div class="col">
             <div class="city-filters">
                 {% for location in locations %}
-                    <button class="city-button">{{ location }}</button>
+                    <a class="button city-button" href="{% url 'homepage_with_code' location.code|lower %}">{{ location.city.name }}</a>
                 {% endfor %}
             </div>
         </div>

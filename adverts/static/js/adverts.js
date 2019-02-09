@@ -1,23 +1,25 @@
 var markers = [];
 
 $(window).ready(function () {
-    var mymap = L.map('mapid').setView([50.064651, 19.944981], 13);
-
-    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        maxZoom: 15,
-        id: 'mapbox.streets',
-        accessToken: map_box_access_token,
-    }).addTo(mymap);
 
     $.ajax({
         url: '/pin_locations/',
         method: 'GET',
+        data: {
+          current_path: window.location.pathname
+        },
         dataType: 'json',
         success: function (data) {
             if(data.success){
-                var cords = data.cords;
-                cords.forEach(function (item) {
+                var mymap = L.map('mapid').setView(data.latlng, 13);
+                L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                    maxZoom: 15,
+                    id: 'mapbox.streets',
+                    accessToken: map_box_access_token,
+                }).addTo(mymap);
+
+                data.cords.forEach(function (item) {
                     var newMarker = L.marker(item).addTo(mymap);
                     markers.push(newMarker);
                 })

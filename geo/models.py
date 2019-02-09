@@ -50,3 +50,17 @@ class Country(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class QuickFilterLocation(models.Model):
+    city = models.ForeignKey('geo.City', on_delete=models.CASCADE)
+    code = models.CharField(max_length=20)
+    lat = models.CharField(max_length=16)
+    lng = models.CharField(max_length=16)
+
+    @property
+    def latlng(self):
+        return [self.lat, self.lng]
+
+    def __str__(self):
+        return f"QFL: {self.city.name}"
