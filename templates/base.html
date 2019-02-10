@@ -19,9 +19,18 @@
 </head>
 <body>
 <div class="container-fluid page-body">
+    <div class="row navbar-row">
+        <div class="col navbar-col">
+            {% block navbar %}
+            
+            {% endblock %}
+        </div>
+    </div>
+<div class="row content-row">
     {% block content %}
 
     {% endblock %}
+</div>
 </div>
 
 <footer>

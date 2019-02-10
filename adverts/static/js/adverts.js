@@ -1,9 +1,8 @@
 var markers = [];
 
 $(window).ready(function () {
-
     $.ajax({
-        url: '/pin_locations/',
+        url: '/adverts/pin_locations/',
         method: 'GET',
         data: {
           current_path: window.location.pathname
@@ -24,7 +23,7 @@ $(window).ready(function () {
                     markers.push(newMarker);
                 })
             }
-            console.log(markers);
+            // console.log(markers);
         },
         error: function (data) {
         }

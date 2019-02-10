@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block navbar %}
+    {% include 'logo.html' %}
+    {% include 'navbar_actions.html' with breadcrumbs="add_advert" %}
+{% endblock %}
+
+{% block content %}
+    <div class="col">
+        {{ form }}
+    </div>
+{% endblock %}

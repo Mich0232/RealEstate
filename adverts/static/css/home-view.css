@@ -4,18 +4,24 @@ html, body{
 }
 
 /* Top filters*/
-.navbar-filters{
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    padding-left: 15px;
-    padding-right: 15px;
+.navbar-row{
     height: 10%;
     border-bottom: lightgrey 2px solid;
 }
+.navbar-col{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 100%;
+}
 
-.navbar-filters .city-filters{
-
+.city-filters{
+    height: 100%;
+    padding: 10px 10px 0;
+    display: flex;
+    align-items: center;
 }
 
 .city-filters .city-button{
@@ -24,10 +30,25 @@ html, body{
     padding: 10px 30px 10px;
     border-radius: 5px;
     border-color: white;
+    text-decoration: none;
 }
 
 .city-button:hover{
     box-shadow: 0 2px 15px -3px greenyellow;
+    text-decoration: none;
+}
+
+.navbar-actions{
+
+}
+
+.navbar-actions .navbar-actions-button{
+    margin: 0 5px 0;
+    background-color: white;
+    padding: 10px 30px 10px;
+    border-radius: 5px;
+    border-color: white;
+    text-decoration: none;
 }
 
 /*All except filters*/
@@ -61,7 +82,7 @@ html, body{
 }
 
 .advert-list-row:hover{
-    box-shadow: 0 2px 20px -3px greenyellow;
+    box-shadow: 0 2px 20px -3px deepskyblue;
 }
 
 .advert-list-row-title{
@@ -124,4 +145,18 @@ footer{
 .footer-content{
     padding: 15px;
     font-size: small;
+}
+
+/* Add Advert*/
+
+
+.logo{
+    border: 2px solid #188bcc;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.logo .logo-truck{
+    color: deepskyblue;
 }
