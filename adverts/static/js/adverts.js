@@ -5,11 +5,11 @@ $(window).ready(function () {
         url: '/adverts/pin_locations/',
         method: 'GET',
         data: {
-          current_path: window.location.pathname
+            current_path: window.location.pathname
         },
         dataType: 'json',
         success: function (data) {
-            if(data.success){
+            if (data.success) {
                 var mymap = L.map('mapid').setView(data.latlng, 13);
                 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -23,14 +23,11 @@ $(window).ready(function () {
                     markers.push(newMarker);
                 })
             }
-            // console.log(markers);
         },
         error: function (data) {
         }
     });
 });
-
-
 
 
 $(window).on('resize', function () {

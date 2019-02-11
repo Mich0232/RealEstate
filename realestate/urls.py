@@ -7,7 +7,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('adverts/', include('adverts.urls')),
     path('admin/', admin.site.urls),
-    path('api/', include('adverts.api.urls')),
+    # path('api/', include('adverts.api.urls')),
+    path('api/geo/', include('geo.urls'))
 ]
 
 

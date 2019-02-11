@@ -148,8 +148,73 @@ footer{
 }
 
 /* Add Advert*/
+/* Containers*/
+
+.location-search-row{
+    height: 70%;
+    padding: 15px 10px 10px;
+}
+
+.location-search-col{
+}
+
+.location-search-box{
+    padding: 20px;
+    border: 1px lightgrey solid;
+    border-radius: 5px;
+    height: 15%;
+    /*min-height: 100px;*/
+}
+
+.location-search-box .pin-icon{
+    padding-right: 15px;
+    color: red
+}
+
+.location-search-map{
+    padding-top: 15px;
+    height: 85%;
+}
+
+.location-search-map .map{
+    border: 1px lightgrey solid;
+    height: 100%;
+}
+
+/* Fields */
+.form-column{
+ /*height: 100%;*/
+    border: 1px red solid;
+}
+
+.input-row{
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.address-field{
+    width: 300px;
+}
 
 
+/* Autocomplete*/
+.ui-autocomplete{
+    position: absolute;
+    cursor: default;
+}
+
+.ui-menu{
+    background-color: whitesmoke;
+    list-style: none;
+    border: 1px lightgrey solid;
+    border-radius: 5px;
+
+}
+
+
+/* Logo */
 .logo{
     border: 2px solid #188bcc;
     background-color: white;

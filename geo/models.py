@@ -25,6 +25,10 @@ class Address(models.Model):
     class Meta:
         verbose_name_plural = 'Addresses'
 
+    @property
+    def display_address(self):
+        return f"{self.street} {self.building}, {self.city.name}"
+
     def __str__(self):
         return f"{self.street} {self.building}, {self.city.name}"
 

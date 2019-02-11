@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load static %}
+
 
 {% block navbar %}
     {% include 'logo.html' %}
@@ -7,6 +9,37 @@
 
 {% block content %}
     <div class="col">
-        {{ form }}
+        <div class="row location-search-row">
+            <div class="col location-search-col">
+                <div class="location-search-box">
+                    <i class="fas fa-map-marker-alt fa-lg pin-icon"></i>
+                    <input type="text" class="address-field">
+                    <input type="button" value="Select">
+                </div>
+                <div class="location-search-map">
+                    <div class="map" id="mapid">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="height: auto">
+            <div class="col-3">
+                {{ form.title.label }}<br>
+                {{ form.estate_type.label }}<br>
+                {{ form.price.label }}<br>
+            </div>
+            <div class="col-9">
+
+                {{ form.title}}<br>
+                {{ form.estate_type }}<br>
+                {{ form.price }}<br>
+            </div>
+        </div>
     </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/advert_forms.js' %}"></script>
 {% endblock %}

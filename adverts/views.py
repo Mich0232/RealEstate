@@ -3,6 +3,7 @@ from django.http import JsonResponse
 
 from .models import Advert
 from .forms import AdvertForm
+from geo.forms import LocationForm, AddressForm
 from geo.models import QuickFilterLocation, City
 
 
@@ -22,8 +23,10 @@ def homepage(request, city_code=None):
                                                                            'current_location': qfl})
 
 def add_advert(request):
-    form = AdvertForm()
-    return render(request, 'adverts/add_advert.html', {'form': form})
+    advert_form = AdvertForm()
+    address_form = AddressForm()
+    location_form = LocationForm()
+    return render(request, 'adverts/add_advert.html', {'form': advert_form})
 
 
 DEFAULT_CITY = 'CRACOW'
